@@ -1,0 +1,2958 @@
+<!DOCTYPE html>
+<!-- saved from url=(0032)https://coreai.wepro.io.vn/jobs# -->
+<html lang="vi" dir="ltr" data-bs-theme="light" data-color-theme="Blue_Theme" data-layout="horizontal"
+      data-boxed-layout="full" data-card="shadow">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Required meta tags -->
+
+    <meta name="csrf-token" content="uxc6s2tWUiR70zevBOhwpryL84tBQ5QR8culPEoc">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Core AI Recuiter</title>
+    <link rel="stylesheet" href="src/quill.css">
+    <!-- Favicon icon-->
+    <link rel="shortcut icon" type="image/png" href="src/favicon.png">
+    <!-- Core Css -->
+    <link rel="stylesheet" href="src/styles.css">
+    <link rel="stylesheet" href="src/ckeditor5.css">
+    <!-- Owl Carousel  -->
+    <link rel="stylesheet" href="src/owl.carousel.min.css">
+    <link rel="stylesheet" href="src/tabler-icons.min.css">
+
+
+    <style>
+        .preloader {
+            width: 100%;
+            height: 100%;
+            top: 0;
+            position: fixed;
+            z-index: 99999;
+            background: #fff;
+        }
+
+        .lds-ripple {
+            display: inline-block;
+            position: relative;
+            width: 40px;
+            position: absolute;
+            top: calc(50% - 3.5px);
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+        }
+    </style>
+    <!-- Huy Lam-->
+    <style>
+        /* Header chính */
+
+        .chat-header {
+            display: flex;
+            align-items: center;
+            background-color: #007bff;
+            /* Màu nền xanh */
+            padding: 10px;
+            color: white;
+            justify-content: space-between;
+        }
+
+        /* SVG Avatar */
+
+        .bot-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid white;
+            /* Viền trắng */
+            margin-right: 10px;
+            object-fit: cover;
+            /* Đảm bảo ảnh SVG không bị méo */
+        }
+
+        /* Nút quay lại */
+
+        .back-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        /* Avatar bot */
+
+        .bot-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid white;
+            /* Viền trắng */
+            margin-right: 10px;
+        }
+
+        /* Tiêu đề và mô tả bot */
+
+        .chat-info {
+            display: flex;
+            flex-direction: column;
+            color: white;
+        }
+
+        .chat-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .chat-subtitle {
+            font-size: 12px;
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        /* Nút chat tròn cố định */
+
+        .chat-toggle-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #6a5acd;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1050;
+        }
+
+        /* Chatbox pop-up */
+
+        .modal-dialog-bottom {
+            position: fixed;
+            bottom: 0;
+            right: 20px;
+            width: 750px;
+            /* Mặc định trên desktop */
+            max-width: 90vw;
+            /* Giới hạn tối đa 90% chiều rộng màn hình */
+            margin: 0;
+            transition: transform 0.3s ease-out;
+        }
+
+        .chat-popup {
+            border-radius: 15px;
+            overflow: hidden;
+            background: white;
+            border: 1px solid #e7e7e7;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Chat messages */
+
+        .chat-box {
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 15px;
+            background: #f9f9f9;
+        }
+
+        /* Tin nhắn */
+
+        .chat-message {
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            font-size: 14px;
+            max-width: 80%;
+        }
+
+        .user-message {
+            background-color: #6a5acd;
+            color: white;
+            align-self: flex-end;
+        }
+
+        /* Thanh nhập tin nhắn (đảm bảo responsive) */
+
+        .chat-input-container {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-top: 1px solid #ddd;
+            background: white;
+            width: 100%;
+        }
+
+        /* Ô nhập tin nhắn */
+
+        .chat-input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        /* Icon */
+
+        .icon-btn {
+            background: none;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            color: #555;
+            margin: 0 5px;
+        }
+
+        .send-btn {
+            background-color: #6a5acd;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            margin-left: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Cấu hình tin nhắn */
+
+        .chat-message {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 5px;
+            max-width: 75%;
+            width: fit-content;
+            /* Điều chỉnh chiều rộng phù hợp với nội dung */
+            height: auto;
+            /* Đảm bảo chiều cao tự động điều chỉnh */
+            word-wrap: break-word;
+            /* Giúp ngắt dòng khi quá dài */
+            padding: 8px 12px;
+            /* Tăng khoảng cách bên trong cho đẹp */
+            border-radius: 12px;
+        }
+
+        /* Tin nhắn người dùng (Canh phải, vừa với nội dung) */
+
+        .user-message {
+            justify-content: flex-end;
+            align-self: flex-end;
+            background-color: #6a5acd;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 12px;
+            max-width: 75%;
+            /* Giới hạn chiều rộng tối đa */
+            text-align: left;
+            margin-left: auto;
+            /* Đẩy tin nhắn về bên phải */
+            width: fit-content;
+            /* Điều chỉnh chiều rộng theo nội dung */
+            display: flex;
+        }
+
+        /* Tin nhắn AI (Canh trái, vừa với nội dung) */
+
+        .bot-message {
+            justify-content: flex-start;
+            align-self: flex-start;
+            background-color: #e3e3e3;
+            color: black;
+            padding: 10px 15px;
+            border-radius: 12px;
+            max-width: 75%;
+            text-align: left;
+            margin-right: auto;
+            /* Đẩy tin nhắn về bên trái */
+            width: fit-content;
+            /* Điều chỉnh chiều rộng theo nội dung */
+            display: flex;
+        }
+
+        .chat-text {
+            display: inline-block;
+            /* Để khung tin nhắn ôm sát nội dung */
+            padding: 10px 15px;
+            /* Khoảng cách bên trong */
+            border-radius: 18px;
+            /* Bo tròn góc */
+            max-width: 100%;
+            /* Đảm bảo không vượt quá container */
+            word-wrap: break-word;
+            /* Xuống dòng khi nội dung dài */
+            white-space: normal;
+            /* Đảm bảo tin nhắn không bị cắt */
+            height: auto;
+            /* Để chiều cao tự động điều chỉnh */
+        }
+
+        /* Hiệu ứng "AI đang nhập..." */
+
+        .typing-dots {
+            display: flex;
+            align-items: center;
+        }
+
+        .typing-dots span {
+            width: 8px;
+            height: 8px;
+            background-color: #888;
+            border-radius: 50%;
+            margin: 0 2px;
+            opacity: 0.4;
+            animation: typingBlink 1.5s infinite;
+        }
+
+        .typing-dots span:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .typing-dots span:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+
+        .typing-dots span:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+        @keyframes typingBlink {
+            0%,
+            100% {
+                opacity: 0.4;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .modal-dialog-bottom {
+                width: 90%;
+                /* Tăng kích thước trên mobile */
+                right: 5%;
+                left: 5%;
+            }
+
+            .chat-box {
+                max-height: 300px;
+                /* Giảm chiều cao */
+            }
+
+            .chat-input-container {
+                flex-wrap: wrap;
+                /* Khi input nhỏ, các icon sẽ tự xuống dòng */
+            }
+
+            .icon-btn {
+                font-size: 16px;
+            }
+
+            .chat-input {
+                font-size: 14px;
+            }
+        }
+
+        /* Tablet */
+
+        @media (max-width: 1024px) {
+            .modal-dialog-bottom {
+                width: 75%;
+                /* Trung bình trên tablet */
+                right: 12%;
+                left: 12%;
+            }
+        }
+    </style>
+</head>
+
+<body data-sidebartype="full" class="" style="">
+<div class="preloader" style="display: none;">
+    <img src="src/favicon.png" alt="loader" class="lds-ripple img-fluid">
+</div>
+<div id="main-wrapper">
+    <aside class="left-sidebar with-vertical">
+        <div>
+            <!-- ---------------------------------- -->
+            <!-- Start Vertical Layout Sidebar -->
+            <!-- ---------------------------------- -->
+            <div class="brand-logo d-flex align-items-center justify-content-between">
+                <a href="https://coreai.wepro.io.vn/horizontal/index.html" class="text-nowrap logo-img">
+                    <img src="src/dark-logo.svg" class="dark-logo" alt="Logo-Dark">
+                    <img src="src/light-logo.svg" class="light-logo" alt="Logo-light" style="display: none;">
+                </a>
+                <a href="javascript:void(0)" class="sidebartoggler ms-auto text-decoration-none fs-5 d-block d-xl-none">
+                    <i class="ti ti-x"></i>
+                </a>
+            </div>
+
+            <nav class="sidebar-nav scroll-sidebar" data-simplebar="init">
+                <div class="simplebar-wrapper" style="margin: -10px;">
+                    <div class="simplebar-height-auto-observer-wrapper">
+                        <div class="simplebar-height-auto-observer"></div>
+                    </div>
+                    <div class="simplebar-mask">
+                        <div class="simplebar-offset" style="right: 0px; bottom: 0px;">
+                            <div class="simplebar-content-wrapper" tabindex="0" role="region"
+                                 aria-label="scrollable content" style="height: auto; overflow: hidden;">
+                                <div class="simplebar-content" style="padding: 10px;">
+                                    <ul id="sidebarnav">
+                                        <!-- ---------------------------------- -->
+                                        <!-- Home -->
+                                        <!-- ---------------------------------- -->
+                                        <li class="nav-small-cap">
+                                            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                                            <span class="hide-menu">Home</span>
+                                        </li>
+                                        <!-- ---------------------------------- -->
+                                        <!-- Dashboard -->
+                                        <!-- ---------------------------------- -->
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link" href="file:///C:/Users/Huy/Downloads/" id="get-url"
+                                               aria-expanded="false">
+                                                    <span>
+                          <i class="ti ti-aperture"></i>
+                      </span>
+                                                <span class="hide-menu">Modern</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link"
+                                               href="https://coreai.wepro.io.vn/horizontal/index2.html"
+                                               aria-expanded="false">
+                                                    <span>
+                          <i class="ti ti-shopping-cart"></i>
+                      </span>
+                                                <span class="hide-menu">eCommerce</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link"
+                                               href="https://coreai.wepro.io.vn/horizontal/index3.html"
+                                               aria-expanded="false">
+                                                    <span>
+                          <i class="ti ti-currency-dollar"></i>
+                      </span>
+                                                <span class="hide-menu">NFT</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link"
+                                               href="https://coreai.wepro.io.vn/horizontal/index4.html"
+                                               aria-expanded="false">
+                                                    <span>
+                          <i class="ti ti-cpu"></i>
+                      </span>
+                                                <span class="hide-menu">Crypto</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link"
+                                               href="https://coreai.wepro.io.vn/horizontal/index5.html"
+                                               aria-expanded="false">
+                                                    <span>
+                          <i class="ti ti-activity-heartbeat"></i>
+                      </span>
+                                                <span class="hide-menu">General</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link"
+                                               href="https://coreai.wepro.io.vn/horizontal/index6.html"
+                                               aria-expanded="false">
+                                                    <span>
+                          <i class="ti ti-playlist"></i>
+                      </span>
+                                                <span class="hide-menu">Music</span>
+                                            </a>
+                                        </li>
+                                        <!-- ---------------------------------- -->
+                                        <!-- Frontend page -->
+                                        <!-- ---------------------------------- -->
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link has-arrow" href="javascript:void(0)"
+                                               aria-expanded="false">
+                                                    <span class="d-flex">
+                          <i class="ti ti-layout-grid"></i>
+                      </span>
+                                                <span class="hide-menu">Frontend page</span>
+                                            </a>
+                                            <ul aria-expanded="false" class="collapse first-level">
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/frontend-landingpage.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Homepage</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/frontend-aboutpage.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">About Us</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/frontend-contactpage.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Contact Us</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/frontend-blogpage.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Blog</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/frontend-blogdetailpage.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Blog Details</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+
+                                        <!-- ---------------------------------- -->
+                                        <!-- Apps -->
+                                        <!-- ---------------------------------- -->
+                                        <li class="nav-small-cap">
+                                            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                                            <span class="hide-menu">Apps</span>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link"
+                                               href="https://coreai.wepro.io.vn/horizontal/app-calendar.html"
+                                               aria-expanded="false">
+                                                    <span>
+                          <i class="ti ti-calendar"></i>
+                      </span>
+                                                <span class="hide-menu">Calendar</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link"
+                                               href="https://coreai.wepro.io.vn/horizontal/app-kanban.html"
+                                               aria-expanded="false">
+                                                    <span>
+                          <i class="ti ti-layout-kanban"></i>
+                      </span>
+                                                <span class="hide-menu">Kanban</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link"
+                                               href="https://coreai.wepro.io.vn/horizontal/app-chat.html"
+                                               aria-expanded="false">
+                                                    <span>
+                          <i class="ti ti-message-dots"></i>
+                      </span>
+                                                <span class="hide-menu">Chat</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link"
+                                               href="https://coreai.wepro.io.vn/horizontal/app-email.html"
+                                               aria-expanded="false">
+                                                    <span>
+                          <i class="ti ti-mail"></i>
+                      </span>
+                                                <span class="hide-menu">Email</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link"
+                                               href="https://coreai.wepro.io.vn/horizontal/app-notes.html"
+                                               aria-expanded="false">
+                                                    <span>
+                          <i class="ti ti-notes"></i>
+                      </span>
+                                                <span class="hide-menu">Notes</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link"
+                                               href="https://coreai.wepro.io.vn/horizontal/app-contact.html"
+                                               aria-expanded="false">
+                                                    <span>
+                          <i class="ti ti-phone"></i>
+                      </span>
+                                                <span class="hide-menu">Contact Table</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link"
+                                               href="https://coreai.wepro.io.vn/horizontal/app-contact2.html"
+                                               aria-expanded="false">
+                                                    <span>
+                          <i class="ti ti-list-details"></i>
+                      </span>
+                                                <span class="hide-menu">Contact List</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link"
+                                               href="https://coreai.wepro.io.vn/horizontal/app-invoice.html"
+                                               aria-expanded="false">
+                                                    <span>
+                          <i class="ti ti-file-text"></i>
+                      </span>
+                                                <span class="hide-menu">Invoice</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link"
+                                               href="https://coreai.wepro.io.vn/horizontal/page-user-profile.html"
+                                               aria-expanded="false">
+                                                    <span>
+                          <i class="ti ti-user-circle"></i>
+                      </span>
+                                                <span class="hide-menu">User Profile</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link has-arrow" href="javascript:void(0)"
+                                               aria-expanded="false">
+                                                    <span class="d-flex">
+                          <i class="ti ti-chart-donut-3"></i>
+                      </span>
+                                                <span class="hide-menu">Blog</span>
+                                            </a>
+                                            <ul aria-expanded="false" class="collapse first-level">
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/blog-posts.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Posts</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/blog-detail.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Details</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link has-arrow" href="javascript:void(0)"
+                                               aria-expanded="false">
+                                                    <span class="d-flex">
+                          <i class="ti ti-basket"></i>
+                      </span>
+                                                <span class="hide-menu">Ecommerce</span>
+                                            </a>
+                                            <ul aria-expanded="false" class="collapse first-level">
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/eco-shop.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Shop</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/eco-shop-detail.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Details</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/eco-product-list.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">List</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/eco-checkout.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Checkout</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/eco-add-product.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Add Product</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/eco-edit-product.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Edit Product</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <!-- ---------------------------------- -->
+                                        <!-- PAGES -->
+                                        <!-- ---------------------------------- -->
+                                        <li class="nav-small-cap">
+                                            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                                            <span class="hide-menu">PAGES</span>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link"
+                                               href="https://coreai.wepro.io.vn/horizontal/page-pricing.html"
+                                               aria-expanded="false">
+                                                    <span>
+                          <i class="ti ti-currency-dollar"></i>
+                      </span>
+                                                <span class="hide-menu">Pricing</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link"
+                                               href="https://coreai.wepro.io.vn/horizontal/page-faq.html"
+                                               aria-expanded="false">
+                                                    <span>
+                          <i class="ti ti-help"></i>
+                      </span>
+                                                <span class="hide-menu">FAQ</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link"
+                                               href="https://coreai.wepro.io.vn/horizontal/page-account-settings.html"
+                                               aria-expanded="false">
+                                                    <span>
+                          <i class="ti ti-user-circle"></i>
+                      </span>
+                                                <span class="hide-menu">Account Setting</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link"
+                                               href="https://coreai.wepro.io.vn/landingpage/index.html"
+                                               aria-expanded="false">
+                                                    <span>
+                          <i class="ti ti-app-window"></i>
+                      </span>
+                                                <span class="hide-menu">Landing Page</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link has-arrow" href="javascript:void(0)"
+                                               aria-expanded="false">
+                                                    <span class="d-flex">
+                          <i class="ti ti-layout"></i>
+                      </span>
+                                                <span class="hide-menu">Widgets</span>
+                                            </a>
+                                            <ul aria-expanded="false" class="collapse first-level">
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/widgets-cards.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Cards</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/widgets-banners.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Banner</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/widgets-charts.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Charts</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/widgets-feeds.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Feed Widgets</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/widgets-apps.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Apps Widgets</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/widgets-data.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Data Widgets</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <!-- ---------------------------------- -->
+                                        <!-- UI -->
+                                        <!-- ---------------------------------- -->
+                                        <li class="nav-small-cap">
+                                            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                                            <span class="hide-menu">UI</span>
+                                        </li>
+                                        <!-- ---------------------------------- -->
+                                        <!-- UI Elements -->
+                                        <!-- ---------------------------------- -->
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link has-arrow" href="javascript:void(0)"
+                                               aria-expanded="false">
+                                                    <span class="d-flex">
+                          <i class="ti ti-layout-grid"></i>
+                      </span>
+                                                <span class="hide-menu">UI Elements</span>
+                                            </a>
+                                            <ul aria-expanded="false" class="collapse first-level">
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/ui-accordian.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Accordian</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/ui-badge.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Badge</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/ui-buttons.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Buttons</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/ui-dropdowns.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Dropdowns</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/ui-modals.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Modals</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/ui-tab.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Tab</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/ui-tooltip-popover.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Tooltip &amp; Popover</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/ui-notification.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Alerts</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/ui-progressbar.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Progressbar</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/ui-pagination.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Pagination</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/ui-typography.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Typography</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/ui-bootstrap-ui.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Bootstrap UI</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/ui-breadcrumb.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Breadcrumb</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/ui-offcanvas.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Offcanvas</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/ui-lists.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Lists</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/ui-grid.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Grid</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/ui-carousel.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Carousel</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/ui-scrollspy.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Scrollspy</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/ui-spinner.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Spinner</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item mb-3">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/ui-link.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Link</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+
+                                        <!-- ---------------------------------- -->
+                                        <!-- Cards -->
+                                        <!-- ---------------------------------- -->
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link has-arrow" href="javascript:void(0)"
+                                               aria-expanded="false">
+                                                    <span class="d-flex">
+                          <i class="ti ti-cards"></i>
+                      </span>
+                                                <span class="hide-menu">Cards</span>
+                                            </a>
+                                            <ul aria-expanded="false" class="collapse first-level">
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/ui-cards.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Basic Cards</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/ui-card-customs.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Custom Cards</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/ui-card-weather.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Weather Cards</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/ui-card-draggable.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Draggable Cards</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+
+                                        <!-- ---------------------------------- -->
+                                        <!-- Component -->
+                                        <!-- ---------------------------------- -->
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link has-arrow" href="javascript:void(0)"
+                                               aria-expanded="false">
+                                                    <span class="d-flex">
+                          <i class="ti ti-components"></i>
+                      </span>
+                                                <span class="hide-menu">Component</span>
+                                            </a>
+                                            <ul aria-expanded="false" class="collapse first-level">
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/component-sweetalert.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Sweet Alert</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/component-nestable.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Nestable</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/component-noui-slider.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Noui slider</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/component-rating.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Rating</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/component-toastr.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Toastr</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+
+                                        <!-- ---------------------------------- -->
+                                        <!-- Forms -->
+                                        <!-- ---------------------------------- -->
+                                        <li class="nav-small-cap">
+                                            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                                            <span class="hide-menu">Forms</span>
+                                        </li>
+                                        <!-- ---------------------------------- -->
+                                        <!-- Form Elements -->
+                                        <!-- ---------------------------------- -->
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link has-arrow" href="javascript:void(0)"
+                                               aria-expanded="false">
+                                                    <span class="d-flex">
+                          <i class="ti ti-file-text"></i>
+                      </span>
+                                                <span class="hide-menu">Form Elements</span>
+                                            </a>
+                                            <ul aria-expanded="false" class="collapse first-level">
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/form-inputs.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Forms Input</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/form-input-groups.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Input Groups</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/form-input-grid.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Input Grid</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/form-checkbox-radio.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Checkbox &amp; Radios</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/form-bootstrap-switch.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Bootstrap Switch</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/form-select2.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Select2</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+
+                                        <!-- ---------------------------------- -->
+                                        <!-- Form Addons -->
+                                        <!-- ---------------------------------- -->
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link has-arrow" href="javascript:void(0)"
+                                               aria-expanded="false">
+                                                    <span class="d-flex">
+                          <i class="ti ti-qrcode"></i>
+                      </span>
+                                                <span class="hide-menu">Form Addons</span>
+                                            </a>
+                                            <ul aria-expanded="false" class="collapse first-level">
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/form-dropzone.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Dropzone</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/form-mask.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Form Mask</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/form-typeahead.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Form Typehead</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+
+                                        <!-- ---------------------------------- -->
+                                        <!-- Form Validation -->
+                                        <!-- ---------------------------------- -->
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link has-arrow" href="javascript:void(0)"
+                                               aria-expanded="false">
+                                                    <span class="d-flex">
+                          <i class="ti ti-alert-circle"></i>
+                      </span>
+                                                <span class="hide-menu">Form Validation</span>
+                                            </a>
+                                            <ul aria-expanded="false" class="collapse first-level">
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/form-bootstrap-validation.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Bootstrap Validation</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/form-custom-validation.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Custom Validation</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+
+                                        <!-- ---------------------------------- -->
+                                        <!-- Form Pickers -->
+                                        <!-- ---------------------------------- -->
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link has-arrow" href="javascript:void(0)"
+                                               aria-expanded="false">
+                                                    <span class="d-flex">
+                          <i class="ti ti-file-pencil"></i>
+                      </span>
+                                                <span class="hide-menu">Form Pickers</span>
+                                            </a>
+                                            <ul aria-expanded="false" class="collapse first-level">
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/form-picker-colorpicker.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Colorpicker</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/form-picker-bootstrap-rangepicker.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Bootstrap Rangepicker</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/form-picker-bootstrap-datepicker.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Bootstrap Datepicker</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/form-picker-material-datepicker.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Material Datepicker</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+
+                                        <!-- ---------------------------------- -->
+                                        <!-- Form Editor -->
+                                        <!-- ---------------------------------- -->
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link has-arrow" href="javascript:void(0)"
+                                               aria-expanded="false">
+                                                    <span class="d-flex">
+                          <i class="ti ti-dna"></i>
+                      </span>
+                                                <span class="hide-menu">Form Editor</span>
+                                            </a>
+                                            <ul aria-expanded="false" class="collapse first-level">
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/form-editor-quill.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Quill Editor</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/form-editor-tinymce.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Tinymce Editor</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+
+                                        <!-- ---------------------------------- -->
+                                        <!-- Form Input -->
+                                        <!-- ---------------------------------- -->
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link"
+                                               href="https://coreai.wepro.io.vn/horizontal/form-basic.html"
+                                               aria-expanded="false">
+                                                    <span class="d-flex">
+                          <i class="ti ti-archive"></i>
+                      </span>
+                                                <span class="hide-menu">Basic Form</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link"
+                                               href="https://coreai.wepro.io.vn/horizontal/form-vertical.html"
+                                               aria-expanded="false">
+                                                    <span class="d-flex">
+                          <i class="ti ti-box-align-left"></i>
+                      </span>
+                                                <span class="hide-menu">Form Vertical</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link"
+                                               href="https://coreai.wepro.io.vn/horizontal/form-horizontal.html"
+                                               aria-expanded="false">
+                                                    <span class="d-flex">
+                          <i class="ti ti-box-align-bottom"></i>
+                      </span>
+                                                <span class="hide-menu">Form Horizontal</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link"
+                                               href="https://coreai.wepro.io.vn/horizontal/form-actions.html"
+                                               aria-expanded="false">
+                                                    <span class="d-flex">
+                          <i class="ti ti-file-export"></i>
+                      </span>
+                                                <span class="hide-menu">Form Actions</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link"
+                                               href="https://coreai.wepro.io.vn/horizontal/form-row-separator.html"
+                                               aria-expanded="false">
+                                                    <span class="d-flex">
+                          <i class="ti ti-separator-horizontal"></i>
+                      </span>
+                                                <span class="hide-menu">Row Separator</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link"
+                                               href="https://coreai.wepro.io.vn/horizontal/form-bordered.html"
+                                               aria-expanded="false">
+                                                    <span class="d-flex">
+                          <i class="ti ti-border-outer"></i>
+                      </span>
+                                                <span class="hide-menu">Form Bordered</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link"
+                                               href="https://coreai.wepro.io.vn/horizontal/form-detail.html"
+                                               aria-expanded="false">
+                                                    <span class="d-flex">
+                          <i class="ti ti-file-description"></i>
+                      </span>
+                                                <span class="hide-menu">Form Detail</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link"
+                                               href="https://coreai.wepro.io.vn/horizontal/form-striped-row.html"
+                                               aria-expanded="false">
+                                                    <span class="d-flex">
+                          <i class="ti ti-file-analytics"></i>
+                      </span>
+                                                <span class="hide-menu">Striped Rows</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link"
+                                               href="https://coreai.wepro.io.vn/horizontal/form-floating-input.html"
+                                               aria-expanded="false">
+                                                    <span class="d-flex">
+                          <i class="ti ti-file-dots"></i>
+                      </span>
+                                                <span class="hide-menu">Form Floating Input</span>
+                                            </a>
+                                        </li>
+                                        <!-- ---------------------------------- -->
+                                        <!-- Form Wizard -->
+                                        <!-- ---------------------------------- -->
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link"
+                                               href="https://coreai.wepro.io.vn/horizontal/form-wizard.html"
+                                               aria-expanded="false">
+                                                    <span class="d-flex">
+                          <i class="ti ti-files"></i>
+                      </span>
+                                                <span class="hide-menu">Form Wizard</span>
+                                            </a>
+                                        </li>
+                                        <!-- ---------------------------------- -->
+                                        <!-- Form Repeater -->
+                                        <!-- ---------------------------------- -->
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link"
+                                               href="https://coreai.wepro.io.vn/horizontal/form-repeater.html"
+                                               aria-expanded="false">
+                                                    <span class="d-flex">
+                          <i class="ti ti-topology-star-3"></i>
+                      </span>
+                                                <span class="hide-menu">Form Repeater</span>
+                                            </a>
+                                        </li>
+                                        <!-- ---------------------------------- -->
+                                        <!-- Tables -->
+                                        <!-- ---------------------------------- -->
+                                        <li class="nav-small-cap">
+                                            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                                            <span class="hide-menu">Tables</span>
+                                        </li>
+                                        <!-- ---------------------------------- -->
+                                        <!-- Bootstrap Table -->
+                                        <!-- ---------------------------------- -->
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link has-arrow" href="javascript:void(0)"
+                                               aria-expanded="false">
+                                                    <span class="d-flex">
+                          <i class="ti ti-layout-sidebar"></i>
+                      </span>
+                                                <span class="hide-menu">Bootstrap Table</span>
+                                            </a>
+                                            <ul aria-expanded="false" class="collapse first-level">
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/table-basic.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Basic Table</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/table-dark-basic.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Dark Basic Table</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/table-sizing.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Sizing Table</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item mb-3">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/table-layout-coloured.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Coloured Table</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <!-- ---------------------------------- -->
+                                        <!-- Datatable -->
+                                        <!-- ---------------------------------- -->
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link has-arrow" href="javascript:void(0)"
+                                               aria-expanded="false">
+                                                    <span class="d-flex">
+                          <i class="ti ti-air-conditioning-disabled"></i>
+                      </span>
+                                                <span class="hide-menu">Datatables</span>
+                                            </a>
+                                            <ul aria-expanded="false" class="collapse first-level">
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/table-datatable-basic.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Basic Initialisation</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/table-datatable-api.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">API</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/table-datatable-advanced.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Advanced Initialisation</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <!-- ---------------------------------- -->
+                                        <!-- Table Jsgrid -->
+                                        <!-- ---------------------------------- -->
+
+                                        <!-- ---------------------------------- -->
+                                        <!-- Charts -->
+                                        <!-- ---------------------------------- -->
+                                        <li class="nav-small-cap">
+                                            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                                            <span class="hide-menu">Charts</span>
+                                        </li>
+                                        <!-- ---------------------------------- -->
+                                        <!-- Apex Chart -->
+                                        <!-- ---------------------------------- -->
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link has-arrow" href="javascript:void(0)"
+                                               aria-expanded="false">
+                                                    <span class="d-flex">
+                          <i class="ti ti-chart-pie"></i>
+                      </span>
+                                                <span class="hide-menu">Apex Charts</span>
+                                            </a>
+                                            <ul aria-expanded="false" class="collapse first-level">
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/chart-apex-line.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Line Chart</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/chart-apex-area.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Area Chart</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/chart-apex-bar.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Bar Chart</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/chart-apex-pie.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Pie Chart</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/chart-apex-radial.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Radial Chart</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item mb-3">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/chart-apex-radar.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Radar Chart</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+
+                                        <!-- ---------------------------------- -->
+                                        <!-- Sample Pages -->
+                                        <!-- ---------------------------------- -->
+                                        <li class="nav-small-cap">
+                                            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                                            <span class="hide-menu">Sample Pages</span>
+                                        </li>
+
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link has-arrow" href="javascript:void(0)"
+                                               aria-expanded="false">
+                                                    <span class="d-flex">
+                          <i class="ti ti-file"></i>
+                      </span>
+                                                <span class="hide-menu">Sample Pages</span>
+                                            </a>
+                                            <ul aria-expanded="false" class="collapse first-level">
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/pages-animation.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Animation</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/pages-search-result.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Search Result</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/pages-gallery.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Gallery</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/pages-treeview.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Treeview</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/pages-block-ui.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Block-Ui</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item mb-3">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/pages-session-timeout.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Session Timeout</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+
+                                        <!-- ---------------------------------- -->
+                                        <!-- Icons -->
+                                        <!-- ---------------------------------- -->
+                                        <li class="nav-small-cap">
+                                            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                                            <span class="hide-menu">Icons</span>
+                                        </li>
+                                        <!-- ---------------------------------- -->
+                                        <!-- Tabler Icon -->
+                                        <!-- ---------------------------------- -->
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link sidebar-link"
+                                               href="https://coreai.wepro.io.vn/horizontal/icon-tabler.html"
+                                               aria-expanded="false">
+                                                    <span class="rounded-3">
+                          <i class="ti ti-archive"></i>
+                      </span>
+                                                <span class="hide-menu">Tabler Icon</span>
+                                            </a>
+                                        </li>
+                                        <!-- ---------------------------------- -->
+                                        <!-- Solar Icon -->
+                                        <!-- ---------------------------------- -->
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link sidebar-link"
+                                               href="https://coreai.wepro.io.vn/horizontal/icon-solar.html"
+                                               aria-expanded="false">
+                                                    <span class="rounded-3">
+                          <i class="ti ti-mood-smile"></i>
+                      </span>
+                                                <span class="hide-menu">Solar Icon</span>
+                                            </a>
+                                        </li>
+                                        <!-- ---------------------------------- -->
+                                        <!-- AUTH -->
+                                        <!-- ---------------------------------- -->
+                                        <li class="nav-small-cap">
+                                            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                                            <span class="hide-menu">AUTH</span>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link sidebar-link"
+                                               href="https://coreai.wepro.io.vn/horizontal/authentication-error.html"
+                                               aria-expanded="false">
+                                                    <span class="rounded-3">
+                          <i class="ti ti-alert-circle"></i>
+                      </span>
+                                                <span class="hide-menu">Error</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link has-arrow" href="javascript:void(0)"
+                                               aria-expanded="false">
+                                                    <span class="d-flex">
+                          <i class="ti ti-login"></i>
+                      </span>
+                                                <span class="hide-menu">Login</span>
+                                            </a>
+                                            <ul aria-expanded="false" class="collapse first-level">
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/authentication-login.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Side Login</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/authentication-login2.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Boxed Login</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link has-arrow" href="javascript:void(0)"
+                                               aria-expanded="false">
+                                                    <span class="d-flex">
+                          <i class="ti ti-user-plus"></i>
+                      </span>
+                                                <span class="hide-menu">Register</span>
+                                            </a>
+                                            <ul aria-expanded="false" class="collapse first-level">
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/authentication-register.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Side Register</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/authentication-register2.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Boxed Register</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link has-arrow" href="javascript:void(0)"
+                                               aria-expanded="false">
+                                                    <span class="d-flex">
+                          <i class="ti ti-rotate"></i>
+                      </span>
+                                                <span class="hide-menu">Forgot Password</span>
+                                            </a>
+                                            <ul aria-expanded="false" class="collapse first-level">
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/authentication-forgot-password.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Side Forgot Password</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/authentication-forgot-password2.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Boxed Forgot Password</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link has-arrow" href="javascript:void(0)"
+                                               aria-expanded="false">
+                                                    <span class="d-flex">
+                          <i class="ti ti-zoom-code"></i>
+                      </span>
+                                                <span class="hide-menu">Two Steps</span>
+                                            </a>
+                                            <ul aria-expanded="false" class="collapse first-level">
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/authentication-two-steps.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Side Two Steps</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a href="https://coreai.wepro.io.vn/horizontal/authentication-two-steps2.html"
+                                                       class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Boxed Two Steps</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link sidebar-link"
+                                               href="https://coreai.wepro.io.vn/horizontal/authentication-maintenance.html"
+                                               aria-expanded="false">
+                                                    <span class="rounded-3">
+                          <i class="ti ti-settings"></i>
+                      </span>
+                                                <span class="hide-menu">Maintenance</span>
+                                            </a>
+                                        </li>
+                                        <!-- ---------------------------------- -->
+                                        <!-- DOCUMENTATION -->
+                                        <!-- ---------------------------------- -->
+                                        <li class="nav-small-cap">
+                                            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                                            <span class="hide-menu">DOCUMENTATION</span>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link sidebar-link"
+                                               href="https://coreai.wepro.io.vn/docs/index.html" aria-expanded="false">
+                                                    <span class="rounded-3">
+                          <i class="ti ti-file-text"></i>
+                      </span>
+                                                <span class="hide-menu">Getting Started</span>
+                                            </a>
+                                        </li>
+                                        <!-- ---------------------------------- -->
+                                        <!-- OTHER -->
+                                        <!-- ---------------------------------- -->
+                                        <li class="nav-small-cap">
+                                            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                                            <span class="hide-menu">OTHER</span>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link has-arrow" href="javascript:void(0)"
+                                               aria-expanded="false">
+                                                    <span class="d-flex">
+                          <i class="ti ti-box-multiple"></i>
+                      </span>
+                                                <span class="hide-menu">Menu Level</span>
+                                            </a>
+                                            <ul aria-expanded="false" class="collapse first-level">
+                                                <li class="sidebar-item">
+                                                    <a href="javascript:void(0)" class="sidebar-link">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Level 1</span>
+                                                    </a>
+                                                </li>
+                                                <li class="sidebar-item">
+                                                    <a class="sidebar-link has-arrow" href="javascript:void(0)"
+                                                       aria-expanded="false">
+                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-circle"></i>
+                                                        </div>
+                                                        <span class="hide-menu">Level 1.1</span>
+                                                    </a>
+                                                    <ul aria-expanded="false" class="collapse two-level">
+                                                        <li class="sidebar-item">
+                                                            <a href="javascript:void(0)" class="sidebar-link">
+                                                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                                                    <i class="ti ti-circle"></i>
+                                                                </div>
+                                                                <span class="hide-menu">Level 2</span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="sidebar-item">
+                                                            <a class="sidebar-link has-arrow" href="javascript:void(0)"
+                                                               aria-expanded="false">
+                                                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                                                    <i class="ti ti-circle"></i>
+                                                                </div>
+                                                                <span class="hide-menu">Level 2.1</span>
+                                                            </a>
+                                                            <ul aria-expanded="false" class="collapse three-level">
+                                                                <li class="sidebar-item">
+                                                                    <a href="javascript:void(0)" class="sidebar-link">
+                                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                                            <i class="ti ti-circle"></i>
+                                                                        </div>
+                                                                        <span class="hide-menu">Level 3</span>
+                                                                    </a>
+                                                                </li>
+                                                                <li class="sidebar-item">
+                                                                    <a href="javascript:void(0)" class="sidebar-link">
+                                                                        <div class="round-16 d-flex align-items-center justify-content-center">
+                                                                            <i class="ti ti-circle"></i>
+                                                                        </div>
+                                                                        <span class="hide-menu">Level 3.1</span>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link link-disabled"
+                                               href="https://coreai.wepro.io.vn/jobs#disabled" aria-expanded="false">
+                                                    <span class="d-flex">
+                          <i class="ti ti-ban"></i>
+                      </span>
+                                                <span class="hide-menu">Disabled</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link" href="https://coreai.wepro.io.vn/jobs#sub"
+                                               aria-expanded="false">
+                                                <i class="ti ti-star"></i>
+                                                <div class="hide-menu lh-base">
+                                                    <span class="hide-menu d-block">SubCaption</span>
+                                                    <span class="hide-menu d-block fs-2">This is the sutitle</span>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link justify-content-between"
+                                               href="https://coreai.wepro.io.vn/jobs#chip" aria-expanded="false">
+                                                <div class="d-flex align-items-center gap-3">
+                                                        <span class="d-flex">
+                              <i class="ti ti-award"></i>
+                          </span>
+                                                    <span class="hide-menu">Chip</span>
+                                                </div>
+                                                <div class="hide-menu">
+                                                    <span class="badge rounded-circle bg-primary d-flex align-items-center justify-content-center rounded-pill fs-2">9</span>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link justify-content-between"
+                                               href="https://coreai.wepro.io.vn/jobs#outlined" aria-expanded="false">
+                                                <div class="d-flex align-items-center gap-3">
+                                                        <span class="d-flex">
+                              <i class="ti ti-mood-smile"></i>
+                          </span>
+                                                    <span class="hide-menu">Outlined</span>
+                                                </div>
+                                                <span class="hide-menu badge rounded-pill border border-primary text-primary fs-2 py-1 px-2">Outline</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-item">
+                                            <a class="sidebar-link" href="https://google.com/" aria-expanded="false">
+                                                    <span class="d-flex">
+                          <i class="ti ti-star"></i>
+                      </span>
+                                                <span class="hide-menu">External Link</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="simplebar-placeholder" style="width: 0px; height: 0px;"></div>
+                </div>
+                <div class="simplebar-track simplebar-horizontal" style="visibility: hidden;">
+                    <div class="simplebar-scrollbar" style="width: 0px; display: none;"></div>
+                </div>
+                <div class="simplebar-track simplebar-vertical" style="visibility: hidden;">
+                    <div class="simplebar-scrollbar"
+                         style="height: 0px; display: none; transform: translate3d(0px, 0px, 0px);"></div>
+                </div>
+            </nav>
+
+            <div class="fixed-profile p-3 mx-4 mb-2 bg-secondary-subtle rounded mt-3">
+                <div class="hstack gap-3">
+                    <div class="john-img">
+                        <img src="src/user-1.jpg" class="rounded-circle" width="40" height="40" alt="modernize-img">
+                    </div>
+                    <div class="john-title">
+                        <h6 class="mb-0 fs-4 fw-semibold">Mathew</h6>
+                        <span class="fs-2">Designer</span>
+                    </div>
+                    <button class="border-0 bg-transparent text-primary ms-auto" tabindex="0" type="button"
+                            aria-label="logout" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="logout">
+                        <i class="ti ti-power fs-6"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- ---------------------------------- -->
+            <!-- Start Vertical Layout Sidebar -->
+            <!-- ---------------------------------- -->
+        </div>
+    </aside>
+    <div class="page-wrapper">
+        <!--  Header Start -->
+        <header class="topbar">
+            <div class="with-vertical">
+                <nav class="navbar navbar-expand-xl container-fluid p-0 mw-100">
+                    <ul class="navbar-nav">
+                        <li class="nav-item nav-icon-hover-bg rounded-circle ms-n2">
+                            <a class="nav-link sidebartoggler" id="headerCollapse" href="javascript:void(0)">
+                                <i class="ti ti-menu-2"></i>
+                            </a>
+                        </li>
+
+                    </ul>
+
+                    <ul class="navbar-nav quick-links d-none d-lg-flex align-items-center">
+                        <!-- ------------------------------- -->
+                        <!-- start apps Dropdown -->
+                        <!-- ------------------------------- -->
+                        <!--<li class="nav-item nav-icon-hover-bg rounded w-auto dropdown d-none d-lg-block mx-0">
+        <div class="hover-dd">
+          <a class="nav-link" href="javascript:void(0)">
+            Apps<span class="mt-1">
+              <i class="ti ti-chevron-down fs-3"></i>
+            </span>
+          </a>
+          <div class="dropdown-menu dropdown-menu-nav dropdown-menu-animate-up py-0">
+            <div class="row">
+              <div class="col-8">
+                <div class="ps-7 pt-7">
+                  <div class="border-bottom">
+                    <div class="row">
+                      <div class="col-6">
+                        <div class="position-relative">
+                          <a href="/" class="d-flex align-items-center pb-9 position-relative">
+                            <div class="text-bg-light rounded-1 me-3 p-6 d-flex align-items-center justify-content-center">
+                              <img src="../assets/images/svgs/icon-dd-chat.svg" alt="modernize-img" class="img-fluid" width="24" height="24">
+                            </div>
+                            <div>
+                              <h6 class="mb-1 fw-semibold fs-3">
+                                Chat Application
+                              </h6>
+                              <span class="fs-2 d-block text-body-secondary">New messages arrived</span>
+                            </div>
+                          </a>
+                          <a href="../horizontal/app-invoice.html" class="d-flex align-items-center pb-9 position-relative">
+                            <div class="text-bg-light rounded-1 me-3 p-6 d-flex align-items-center justify-content-center">
+                              <img src="../assets/images/svgs/icon-dd-invoice.svg" alt="modernize-img" class="img-fluid" width="24" height="24">
+                            </div>
+                            <div>
+                              <h6 class="mb-1 fw-semibold fs-3">Invoice App</h6>
+                              <span class="fs-2 d-block text-body-secondary">Get latest invoice</span>
+                            </div>
+                          </a>
+                          <a href="../horizontal/app-contact2.html" class="d-flex align-items-center pb-9 position-relative">
+                            <div class="text-bg-light rounded-1 me-3 p-6 d-flex align-items-center justify-content-center">
+                              <img src="../assets/images/svgs/icon-dd-mobile.svg" alt="modernize-img" class="img-fluid" width="24" height="24">
+                            </div>
+                            <div>
+                              <h6 class="mb-1 fw-semibold fs-3">
+                                Contact Application
+                              </h6>
+                              <span class="fs-2 d-block text-body-secondary">2 Unsaved Contacts</span>
+                            </div>
+                          </a>
+                          <a href="../horizontal/app-email.html" class="d-flex align-items-center pb-9 position-relative">
+                            <div class="text-bg-light rounded-1 me-3 p-6 d-flex align-items-center justify-content-center">
+                              <img src="../assets/images/svgs/icon-dd-message-box.svg" alt="modernize-img" class="img-fluid" width="24" height="24">
+                            </div>
+                            <div>
+                              <h6 class="mb-1 fw-semibold fs-3">Email App</h6>
+                              <span class="fs-2 d-block text-body-secondary">Get new emails</span>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="position-relative">
+                          <a href="../horizontal/page-user-profile.html" class="d-flex align-items-center pb-9 position-relative">
+                            <div class="text-bg-light rounded-1 me-3 p-6 d-flex align-items-center justify-content-center">
+                              <img src="../assets/images/svgs/icon-dd-cart.svg" alt="modernize-img" class="img-fluid" width="24" height="24">
+                            </div>
+                            <div>
+                              <h6 class="mb-1 fw-semibold fs-3">
+                                User Profile
+                              </h6>
+                              <span class="fs-2 d-block text-body-secondary">learn more information</span>
+                            </div>
+                          </a>
+                          <a href="#" class="d-flex align-items-center pb-9 position-relative">
+                            <div class="text-bg-light rounded-1 me-3 p-6 d-flex align-items-center justify-content-center">
+                              <img src="../assets/images/svgs/icon-dd-date.svg" alt="modernize-img" class="img-fluid" width="24" height="24">
+                            </div>
+                            <div>
+                              <h6 class="mb-1 fw-semibold fs-3">
+                                Calendar App
+                              </h6>
+                              <span class="fs-2 d-block text-body-secondary">Get dates</span>
+                            </div>
+                          </a>
+                          <a href="../horizontal/app-contact.html" class="d-flex align-items-center pb-9 position-relative">
+                            <div class="text-bg-light rounded-1 me-3 p-6 d-flex align-items-center justify-content-center">
+                              <img src="../assets/images/svgs/icon-dd-lifebuoy.svg" alt="modernize-img" class="img-fluid" width="24" height="24">
+                            </div>
+                            <div>
+                              <h6 class="mb-1 fw-semibold fs-3">
+                                Contact List Table
+                              </h6>
+                              <span class="fs-2 d-block text-body-secondary">Add new contact</span>
+                            </div>
+                          </a>
+                          <a href="../horizontal/app-notes.html" class="d-flex align-items-center pb-9 position-relative">
+                            <div class="text-bg-light rounded-1 me-3 p-6 d-flex align-items-center justify-content-center">
+                              <img src="../assets/images/svgs/icon-dd-application.svg" alt="modernize-img" class="img-fluid" width="24" height="24">
+                            </div>
+                            <div>
+                              <h6 class="mb-1 fw-semibold fs-3">
+                                Notes Application
+                              </h6>
+                              <span class="fs-2 d-block text-body-secondary">To-do and Daily tasks</span>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row align-items-center py-3">
+                    <div class="col-8">
+                      <a class="fw-semibold d-flex align-items-center lh-1" href="javascript:void(0)">
+                        <i class="ti ti-help fs-6 me-2"></i>Frequently Asked Questions
+                      </a>
+                    </div>
+                    <div class="col-4">
+                      <div class="d-flex justify-content-end pe-4">
+                        <button class="btn btn-primary">Check</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-4 ms-n4">
+                <div class="position-relative p-7 border-start h-100">
+                  <h5 class="fs-5 mb-9 fw-semibold">Quick Links</h5>
+                  <ul class="">
+                    <li class="mb-3">
+                      <a class="fw-semibold bg-hover-primary" href="../horizontal/page-pricing.html">Pricing Page</a>
+                    </li>
+                    <li class="mb-3">
+                      <a class="fw-semibold bg-hover-primary" href="../horizontal/authentication-login.html">Authentication
+                        Design</a>
+                    </li>
+                    <li class="mb-3">
+                      <a class="fw-semibold bg-hover-primary" href="../horizontal/authentication-register.html">Register Now</a>
+                    </li>
+                    <li class="mb-3">
+                      <a class="fw-semibold bg-hover-primary" href="../horizontal/authentication-error.html">404 Error Page</a>
+                    </li>
+                    <li class="mb-3">
+                      <a class="fw-semibold bg-hover-primary" href="../horizontal/app-notes.html">Notes App</a>
+                    </li>
+                    <li class="mb-3">
+                      <a class="fw-semibold bg-hover-primary" href="../horizontal/page-user-profile.html">User Application</a>
+                    </li>
+                    <li class="mb-3">
+                      <a class="fw-semibold bg-hover-primary" href="../horizontal/page-account-settings.html">Account Settings</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>-->
+                        <!-- ------------------------------- -->
+                        <!-- end apps Dropdown -->
+                        <!-- ------------------------------- -->
+                        <li class="nav-item dropdown-hover d-none d-lg-block">
+                            <a class="nav-link" href="https://coreai.wepro.io.vn/">Dashboards</a>
+                        </li>
+                        <li class="nav-item dropdown-hover d-none d-lg-block">
+                            <a class="nav-link" href="https://coreai.wepro.io.vn/jobs">Jobs</a>
+                        </li>
+                        <!--<li class="nav-item dropdown-hover d-none d-lg-block">
+        <a class="nav-link" href="#">Candidate</a>
+      </li>-->
+                        <li class="nav-item dropdown-hover d-none d-lg-block">
+                            <a class="nav-link" href="https://coreai.wepro.io.vn/horizontal/app-email.html">
+                                <!--<a class="nav-link" href="#">Candidate</a>--></a>
+                        </li>
+
+                    </ul>
+
+                    <div class="d-block d-lg-none py-4">
+                        <a href="https://coreai.wepro.io.vn/jobs#" class="text-nowrap logo-img">
+                            <img src="src/dark-logo.svg" class="dark-logo" alt="Logo-Dark">
+                            <img src="src/light-logo.svg" class="light-logo" alt="Logo-light" style="display: none;">
+                        </a>
+                    </div>
+                    <a class="navbar-toggler nav-icon-hover-bg rounded-circle p-0 mx-0 border-0"
+                       href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="ti ti-dots fs-7"></i>
+                    </a>
+                    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <a href="javascript:void(0)"
+                               class="nav-link nav-icon-hover-bg rounded-circle mx-0 ms-n1 d-flex d-lg-none align-items-center justify-content-center"
+                               type="button" data-bs-toggle="offcanvas" data-bs-target="#mobilenavbar"
+                               aria-controls="offcanvasWithBothOptions">
+                                <i class="ti ti-align-justified fs-7"></i>
+                            </a>
+                        </div>
+                    </div>
+                </nav>
+                <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="mobilenavbar"
+                     aria-labelledby="offcanvasWithBothOptionsLabel">
+                    <nav class="sidebar-nav scroll-sidebar">
+                        <div class="offcanvas-header justify-content-between">
+                            <img src="src/favicon.ico" alt="modernize-img" class="img-fluid">
+                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                                    aria-label="Close"></button>
+                        </div>
+                        <div class="offcanvas-body h-n80" data-simplebar="init">
+                            <div class="simplebar-wrapper" style="margin: -16px;">
+                                <div class="simplebar-height-auto-observer-wrapper">
+                                    <div class="simplebar-height-auto-observer"></div>
+                                </div>
+                                <div class="simplebar-mask">
+                                    <div class="simplebar-offset" style="right: 0px; bottom: 0px;">
+                                        <div class="simplebar-content-wrapper" tabindex="0" role="region"
+                                             aria-label="scrollable content" style="height: auto; overflow: hidden;">
+                                            <div class="simplebar-content" style="padding: 16px;">
+                                                <ul id="sidebarnav">
+                                                    <li class="sidebar-item selected">
+                                                        <a class="sidebar-link has-arrow active"
+                                                           href="javascript:void(0)" aria-expanded="false">
+                                                                <span>
+                    <i class="ti ti-apps"></i>
+                  </span>
+                                                            <span class="hide-menu">Apps</span>
+                                                        </a>
+                                                        <ul aria-expanded="false" class="collapse first-level my-3 in">
+                                                            <li class="sidebar-item py-2">
+                                                                <a href="https://coreai.wepro.io.vn/"
+                                                                   class="d-flex align-items-center">
+                                                                    <div class="text-bg-light rounded-1 me-3 p-6 d-flex align-items-center justify-content-center">
+                                                                        <img src="src/icon-dd-chat.svg"
+                                                                             alt="modernize-img" class="img-fluid"
+                                                                             width="24" height="24">
+                                                                    </div>
+                                                                    <div>
+                                                                        <h6 class="mb-1 bg-hover-primary">Chat
+                                                                            Application</h6>
+                                                                        <span class="fs-2 d-block text-muted">New messages arrived</span>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                            <li class="sidebar-item py-2">
+                                                                <a href="https://coreai.wepro.io.vn/horizontal/app-invoice.html"
+                                                                   class="d-flex align-items-center">
+                                                                    <div class="text-bg-light rounded-1 me-3 p-6 d-flex align-items-center justify-content-center">
+                                                                        <img src="src/icon-dd-invoice.svg"
+                                                                             alt="modernize-img" class="img-fluid"
+                                                                             width="24" height="24">
+                                                                    </div>
+                                                                    <div>
+                                                                        <h6 class="mb-1 bg-hover-primary">Invoice
+                                                                            App</h6>
+                                                                        <span class="fs-2 d-block text-muted">Get latest invoice</span>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                            <li class="sidebar-item py-2">
+                                                                <a href="https://coreai.wepro.io.vn/horizontal/app-cotact.html"
+                                                                   class="d-flex align-items-center">
+                                                                    <div class="text-bg-light rounded-1 me-3 p-6 d-flex align-items-center justify-content-center">
+                                                                        <img src="src/icon-dd-mobile.svg"
+                                                                             alt="modernize-img" class="img-fluid"
+                                                                             width="24" height="24">
+                                                                    </div>
+                                                                    <div>
+                                                                        <h6 class="mb-1 bg-hover-primary">Contact
+                                                                            Application</h6>
+                                                                        <span class="fs-2 d-block text-muted">2 Unsaved Contacts</span>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                            <li class="sidebar-item py-2">
+                                                                <a href="https://coreai.wepro.io.vn/horizontal/app-email.html"
+                                                                   class="d-flex align-items-center">
+                                                                    <div class="text-bg-light rounded-1 me-3 p-6 d-flex align-items-center justify-content-center">
+                                                                        <img src="src/icon-dd-message-box.svg"
+                                                                             alt="modernize-img" class="img-fluid"
+                                                                             width="24" height="24">
+                                                                    </div>
+                                                                    <div>
+                                                                        <h6 class="mb-1 bg-hover-primary">Email App</h6>
+                                                                        <span class="fs-2 d-block text-muted">Get new emails</span>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                            <li class="sidebar-item py-2">
+                                                                <a href="https://coreai.wepro.io.vn/horizontal/page-user-profile.html"
+                                                                   class="d-flex align-items-center">
+                                                                    <div class="text-bg-light rounded-1 me-3 p-6 d-flex align-items-center justify-content-center">
+                                                                        <img src="src/icon-dd-cart.svg"
+                                                                             alt="modernize-img" class="img-fluid"
+                                                                             width="24" height="24">
+                                                                    </div>
+                                                                    <div>
+                                                                        <h6 class="mb-1 bg-hover-primary">User
+                                                                            Profile</h6>
+                                                                        <span class="fs-2 d-block text-muted">learn more information</span>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                            <li class="sidebar-item py-2">
+                                                                <a href="https://coreai.wepro.io.vn/jobs#"
+                                                                   class="d-flex align-items-center active">
+                                                                    <div class="text-bg-light rounded-1 me-3 p-6 d-flex align-items-center justify-content-center">
+                                                                        <img src="src/icon-dd-date.svg"
+                                                                             alt="modernize-img" class="img-fluid"
+                                                                             width="24" height="24">
+                                                                    </div>
+                                                                    <div>
+                                                                        <h6 class="mb-1 bg-hover-primary">Calendar
+                                                                            App</h6>
+                                                                        <span class="fs-2 d-block text-muted">Get dates</span>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                            <li class="sidebar-item py-2">
+                                                                <a href="https://coreai.wepro.io.vn/horizontal/app-contact2.html"
+                                                                   class="d-flex align-items-center">
+                                                                    <div class="text-bg-light rounded-1 me-3 p-6 d-flex align-items-center justify-content-center">
+                                                                        <img src="src/icon-dd-lifebuoy.svg"
+                                                                             alt="modernize-img" class="img-fluid"
+                                                                             width="24" height="24">
+                                                                    </div>
+                                                                    <div>
+                                                                        <h6 class="mb-1 bg-hover-primary">Contact List
+                                                                            Table</h6>
+                                                                        <span class="fs-2 d-block text-muted">Add new contact</span>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                            <li class="sidebar-item py-2">
+                                                                <a href="https://coreai.wepro.io.vn/horizontal/app-notes.html"
+                                                                   class="d-flex align-items-center">
+                                                                    <div class="text-bg-light rounded-1 me-3 p-6 d-flex align-items-center justify-content-center">
+                                                                        <img src="src/icon-dd-application.svg"
+                                                                             alt="modernize-img" class="img-fluid"
+                                                                             width="24" height="24">
+                                                                    </div>
+                                                                    <div>
+                                                                        <h6 class="mb-1 bg-hover-primary">Notes
+                                                                            Application</h6>
+                                                                        <span class="fs-2 d-block text-muted">To-do and Daily tasks</span>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                            <ul class="px-8 mt-7 mb-4">
+                                                                <li class="sidebar-item mb-3">
+                                                                    <h5 class="fs-5 fw-semibold">Quick Links</h5>
+                                                                </li>
+                                                                <li class="sidebar-item py-2">
+                                                                    <a class="fw-semibold text-dark"
+                                                                       href="https://coreai.wepro.io.vn/horizontal/page-pricing.html">Pricing
+                                                                        Page</a>
+                                                                </li>
+                                                                <li class="sidebar-item py-2">
+                                                                    <a class="fw-semibold text-dark"
+                                                                       href="https://coreai.wepro.io.vn/horizontal/authentication-login.html">Authentication
+                                                                        Design</a>
+                                                                </li>
+                                                                <li class="sidebar-item py-2">
+                                                                    <a class="fw-semibold text-dark"
+                                                                       href="https://coreai.wepro.io.vn/horizontal/authentication-register.html">Register
+                                                                        Now</a>
+                                                                </li>
+                                                                <li class="sidebar-item py-2">
+                                                                    <a class="fw-semibold text-dark"
+                                                                       href="https://coreai.wepro.io.vn/horizontal/authentication-error.html">404
+                                                                        Error Page</a>
+                                                                </li>
+                                                                <li class="sidebar-item py-2">
+                                                                    <a class="fw-semibold text-dark"
+                                                                       href="https://coreai.wepro.io.vn/horizontal/app-notes.html">Notes
+                                                                        App</a>
+                                                                </li>
+                                                                <li class="sidebar-item py-2">
+                                                                    <a class="fw-semibold text-dark"
+                                                                       href="https://coreai.wepro.io.vn/horizontal/page-user-profile.html">User
+                                                                        Application</a>
+                                                                </li>
+                                                                <li class="sidebar-item py-2">
+                                                                    <a class="fw-semibold text-dark"
+                                                                       href="https://coreai.wepro.io.vn/horizontal/page-account-settings.html">Account
+                                                                        Settings</a>
+                                                                </li>
+                                                            </ul>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="sidebar-item">
+                                                        <a class="sidebar-link" href="https://coreai.wepro.io.vn/"
+                                                           aria-expanded="false">
+                                                                <span>
+                    <i class="ti ti-message-dots"></i>
+                  </span>
+                                                            <span class="hide-menu">Chat</span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="sidebar-item">
+                                                        <a class="sidebar-link" href="https://coreai.wepro.io.vn/jobs#"
+                                                           aria-expanded="false">
+                                                                <span>
+                    <i class="ti ti-calendar"></i>
+                  </span>
+                                                            <span class="hide-menu">Calendar</span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="sidebar-item">
+                                                        <a class="sidebar-link"
+                                                           href="https://coreai.wepro.io.vn/horizontal/app-email.html"
+                                                           aria-expanded="false">
+                                                                <span>
+                    <i class="ti ti-mail"></i>
+                  </span>
+                                                            <span class="hide-menu">Email</span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="simplebar-placeholder" style="width: 0px; height: 0px;"></div>
+                            </div>
+                            <div class="simplebar-track simplebar-horizontal" style="visibility: hidden;">
+                                <div class="simplebar-scrollbar" style="width: 0px; display: none;"></div>
+                            </div>
+                            <div class="simplebar-track simplebar-vertical" style="visibility: hidden;">
+                                <div class="simplebar-scrollbar" style="height: 0px; display: none;"></div>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            <div class="app-header with-horizontal">
+                <nav class="navbar navbar-expand-xl container-fluid p-0">
+                    <ul class="navbar-nav align-items-center">
+                        <li class="nav-item nav-icon-hover-bg rounded-circle d-flex d-xl-none ms-n2">
+                            <a class="nav-link sidebartoggler" id="sidebarCollapse" href="javascript:void(0)">
+                                <i class="ti ti-menu-2"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item d-none d-xl-block">
+                            <a href="https://coreai.wepro.io.vn/jobs#" class="text-nowrap nav-link">
+                                <img src="src/dark-logo.svg" class="dark-logo" width="140" alt="modernize-img">
+                                <img src="src/light-logo.svg" class="light-logo" width="140" alt="modernize-img"
+                                     style="display: none;">
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav quick-links d-none d-xl-flex align-items-center">
+                        <li class="nav-item dropdown-hover d-none d-lg-block">
+                            <a class="nav-link" href="https://coreai.wepro.io.vn/">Trang chủ</a>
+                        </li>
+                        <li class="nav-item dropdown-hover d-none d-lg-block">
+                            <a class="nav-link" href="https://coreai.wepro.io.vn/jobs">Tin tuyển dụng</a>
+                        </li>
+
+                        <li class="nav-item dropdown-hover d-none d-lg-block">
+                            <a class="nav-link" href="https://coreai.wepro.io.vn/jobs#">Ứng viên</a>
+                        </li>
+
+                        <li class="nav-item dropdown-hover d-none d-lg-block">
+                            <a class="nav-link" href="https://coreai.wepro.io.vn/jobs#">Trợ lý ảo</a>
+                        </li>
+                    </ul>
+                    <div class="d-block d-xl-none">
+                        <a href="https://coreai.wepro.io.vn/jobs#" class="text-nowrap nav-link">
+                            <img src="src/dark-logo.svg" width="180" alt="modernize-img">
+                        </a>
+                    </div>
+                    <a class="navbar-toggler nav-icon-hover-bg rounded-circle p-0 mx-0 border-0"
+                       href="javascript:void(0)" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="p-2">
+            <i class="ti ti-dots fs-7"></i>
+          </span>
+                    </a>
+                    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                        <div class="d-flex align-items-center justify-content-between px-0 px-xl-8">
+                            <a href="javascript:void(0)"
+                               class="nav-link round-40 p-1 ps-0 d-flex d-xl-none align-items-center justify-content-center"
+                               type="button" data-bs-toggle="offcanvas" data-bs-target="#mobilenavbar"
+                               aria-controls="offcanvasWithBothOptions">
+                                <i class="ti ti-align-justified fs-7"></i>
+                            </a>
+
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <aside class="left-sidebar with-horizontal">
+            <!-- Sidebar scroll-->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-3">
+                        <div class="submenu-content">
+                            <p id="title-page" class="title-page m-0">HiStaff Agent</p>
+                        </div>
+                    </div>
+                    <div class="col-9">
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- End Sidebar scroll-->
+
+    <style>
+        .submenu-content {
+            display: flex;
+            width: 100%;
+            height: 64px;
+            align-items: center;
+            padding: 0px 32px;
+        }
+
+        .submenu-content .title-page {
+            font-weight: 700;
+            font-size: 1.25rem;
+            line-height: 1.75rem;
+        }
+
+        .action-toolbar {
+            display: flex;
+            width: 100%;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+
+        .toolbar-search {
+            max-width: 500px;
+        }
+    </style>
+    <!--  Header End -->
+
+    <div class="body-wrapper bg-info-subtle vh-100" style="padding-top: 200px">
+
+        <div class="container h-100 pb-10">
+            <div class=" chat-popup h-100 ">
+                <div class="p-9 border-bottom chat-meta-user d-flex align-items-center justify-content-between">
+                    <div class="hstack gap-3 current-chat-user-name">
+                        <div class="position-relative">
+                            <img src="src/Histaff-Agents.svg" alt="user1" width="45" height="45"
+                                 class="rounded-circle">
+                            <span class="position-absolute bottom-0 end-0 p-1 badge rounded-pill bg-success">
+                            <span class="visually-hidden">New alerts</span>
+                        </span>
+                        </div>
+                        <div>
+                            <h6 class="mb-1 name fw-semibold">HiStaff Agent</h6>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Giao diện chat -->
+
+                <div class="w-100 chat-container h-100 position-relative">
+
+
+                        <div class="chat-box-inner bg-light-subtle p-4 h-100" id="chat-messages">
+
+                            <div class="hstack gap-2 align-items-start mb-3 justify-content-start fade-in"
+                                 style="opacity: 1;">
+                                <div></div>
+                            </div>
+                        </div>
+
+
+
+
+                    <!-- Thanh nhập tin nhắn -->
+                    <div class="chat-input-container position-absolute bottom-0 left-0 w-100">
+                        <input type="text" id="chat-input" class="chat-input"
+                               placeholder="Type a Message">
+                    </div>
+                </div>
+                <!-- Kết thúc giao diện chat -->
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="dark-transparent sidebartoggler"></div>
+<script defer="defer" src="src/vcd15cbe7772f49c399c6a5babf22c1241717689176015"
+        integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ=="
+        data-cf-beacon="{&quot;rayId&quot;:&quot;91229918eef55c88&quot;,&quot;version&quot;:&quot;2025.1.0&quot;,&quot;r&quot;:1,&quot;token&quot;:&quot;6b699d8870184be1bbd475db3b7d9612&quot;,&quot;serverTiming&quot;:{&quot;name&quot;:{&quot;cfExtPri&quot;:true,&quot;cfL4&quot;:true,&quot;cfSpeedBrain&quot;:true,&quot;cfCacheStatus&quot;:true}}}"
+        crossorigin="anonymous"></script>
+
+
+<script src="src/vendor.min.js.download"></script>
+<!-- Import Js Files -->
+<script src="src/bootstrap.bundle.min.js.download"></script>
+<script src="src/simplebar.min.js.download"></script>
+<script src="src/app.horizontal.init.js.download"></script>
+<script src="src/theme.js.download"></script>
+<script src="src/sidebars.js.download"></script>
+<script src="src/app.minmenu.js.download"></script>
+<!-- solar icons -->
+<script src="src/owl.carousel.min.js.download"></script>
+<script src="src/apexcharts.min.js.download"></script>
+<script src="src/dashboard.js.download"></script>
+<script src="src/iconify-icon.min.js.download"></script>
+<script src="src/ckeditor5.umd.js.download"></script>
+
+<script>
+    // Hàm gọi API bất đồng bộ sử dụng fetch
+    async function chatCall(chatInput) {
+        try {
+            const response = await fetch("https://n8n.wepro.io.vn/webhook/chat", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    message: chatInput
+                })
+            });
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error("Error:", error);
+            return false;
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        showWelcomeMessage();
+    });
+
+    function showWelcomeMessage() {
+        const chatMessages = document.getElementById("chat-messages");
+
+        const welcomeMsg = document.createElement("div");
+        welcomeMsg.classList.add("hstack", "gap-2", "align-items-start", "mb-3", "justify-content-start", "fade-in");
+        welcomeMsg.style.opacity = 0; // Ẩn trước khi hiển thị hiệu ứng
+
+        welcomeMsg.innerHTML = `
+        <img src="Histaff-Agents.svg" class="chat-avatar bot-avatar" alt="Bot Avatar">
+        <div>
+            <h6 class="fs-2 text-muted">HiStaff Agent</h6>
+            <div class="chat-bubble p-3 rounded-3 d-inline-block text-dark fs-3" style="background-color: #ffffff;">
+                <span id="typing-effect"></span> <!-- Hiệu ứng gõ chữ -->
+                <ul id="chat-functions" class="mt-2 fs-3 text-dark d-none">
+                <li>✅ Tạo Job Details</li>
+                <li>✅ Trò chuyện với kho hồ sơ ứng viên </li>
+                <li>✅ Hỗ trợ tạo hồ sơ</li>
+                <li>✅ Mồ hình hóa dữ liệu</li>
+            </ul>
+            </div>
+
+            <div id="quick-actions" class="mt-3 d-none">
+                <button class="btn btn-outline-primary bg-white btn-sm" onclick="sendQuickMessage('Cách sử dụng chatbot?')">Cách sử dụng chatbot?</button>
+                <button class="btn btn-outline-primary bg-white btn-sm" onclick="sendQuickMessage('Liên hệ bộ phận hỗ trợ')">Liên hệ bộ phận hỗ trợ</button>
+            </div>
+        </div>
+    `;
+
+        chatMessages.appendChild(welcomeMsg);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+
+        // Hiệu ứng xuất hiện mượt mà
+        setTimeout(() => {
+            welcomeMsg.style.opacity = 1;
+        }, 100);
+
+        // Hiệu ứng gõ chữ (typing effect)
+        const text = "Xin chào! Tôi là HiStaff Agent 🤖. Tôi có thể giúp bạn với các vấn đề sau:";
+        let i = 0;
+        const typingEffect = document.getElementById("typing-effect");
+
+        function typeText() {
+            if (i < text.length) {
+                typingEffect.innerHTML += text.charAt(i);
+                i++;
+                setTimeout(typeText, 30); // Tốc độ gõ chữ
+            } else {
+                // Hiện danh sách chức năng và nút sau khi gõ xong
+                setTimeout(() => {
+                    document.getElementById("chat-functions").classList.remove("d-none");
+                    document.getElementById("quick-actions").classList.remove("d-none");
+                }, 500);
+            }
+        }
+
+        setTimeout(typeText, 500);
+    }
+
+
+    // Hàm gửi tin nhắn
+    async function sendMessage() {
+        var inputField = document.getElementById("chat-input");
+        var message = inputField.value.trim();
+        if (message === "") return;
+
+        var chatMessages = document.getElementById("chat-messages");
+
+        // Lấy thời gian hiện tại
+        var now = new Date();
+        var timeString = now.getHours() + ":" + now.getMinutes().toString().padStart(2, '0');
+
+        // Hiển thị tin nhắn của User
+        var userMsg = document.createElement("div");
+        userMsg.classList.add("hstack", "gap-3", "align-items-start", "mb-3", "justify-content-end");
+        userMsg.innerHTML = `
+        <div class="text-end">
+            <h6 class="fs-2 text-muted">${timeString}</h6>
+            <div class="p-2  rounded-1 d-inline-block text-dark fs-3" style="background-color: #ffffff;">
+                ${message}
+            </div>
+        </div>
+    `;
+        chatMessages.appendChild(userMsg);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+
+        // Hiển thị hiệu ứng "AI đang nhập..."
+        var loadingMsg = document.createElement("div");
+        loadingMsg.classList.add("hstack", "gap-3", "align-items-start", "mb-3", "justify-content-start", "typing-animation");
+        loadingMsg.innerHTML = `
+        <img src="Histaff-Agents.svg" alt="bot-avatar" width="40" height="40" class="rounded-circle">
+        <div>
+            <h6 class="fs-2 text-muted">HiStaff Agent is typing...</h6>
+            <div class="p-2 text-muted typing-dots">
+                <span>.</span><span>.</span><span>.</span>
+            </div>
+        </div>
+    `;
+        chatMessages.appendChild(loadingMsg);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+        inputField.value = "";
+
+        try {
+            const result = await chatCall(message);
+            chatMessages.removeChild(loadingMsg);
+
+            if (result && result.response && result.response.text) {
+                var botMsg = document.createElement("div");
+                botMsg.classList.add("hstack", "gap-3", "align-items-start", "mb-3", "justify-content-start");
+                botMsg.innerHTML = `
+                <img src="Histaff-Agents.svg" class="chat-avatar bot-avatar" alt="Bot Avatar">
+                <div>
+                    <h6 class="fs-2 text-muted">HiStaff Agent, ${timeString}</h6>
+                    <div class="p-2  rounded-1 d-inline-block text-dark fs-3" style="background-color: #ffffff;">
+                        ${result.response.text}
+                    </div>
+                </div>
+            `;
+                chatMessages.appendChild(botMsg);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            } else {
+                alert("Hệ thống mạng bị lỗi");
+            }
+        } catch (error) {
+            chatMessages.removeChild(loadingMsg);
+            alert("Hệ thống mạng bị lỗi");
+        }
+    }
+
+    // Gán function vào nút Send
+    document.getElementById("send-btn").addEventListener("click", function () {
+        sendMessage();
+    });
+    // Gán function khi nhấn phím Enter
+    document.getElementById("chat-input").addEventListener("keypress", function (event) {
+        if (event.key === "Enter") {
+            event.preventDefault(); // Ngăn form submit mặc định
+            sendMessage();
+        }
+    });
+    // Sự kiện cho các nút icon
+    document.getElementById("emoji-btn").addEventListener("click", function () {
+        alert("Tính năng emoji sẽ được thêm sau!");
+    });
+
+    document.getElementById("image-btn").addEventListener("click", function () {
+        alert("Tính năng gửi ảnh sẽ được thêm sau!");
+    });
+
+    document.getElementById("attachment-btn").addEventListener("click", function () {
+        alert("Tính năng gửi tệp sẽ được thêm sau!");
+    });
+</script>
+
+<script>
+    const {
+        ClassicEditor,
+        Essentials,
+        Bold,
+        Italic,
+        Font,
+        Paragraph,
+        GeneralHtmlSupport
+    } = CKEDITOR;
+</script>
+<!--<script src="/assets/libs/quill/quill.min.js"></script>-->
+<div class="ck-body-wrapper">
+    <div class="ck ck-reset_all ck-body ck-rounded-corners" dir="ltr" role="application">
+        <div class="ck ck-clipboard-drop-target-line ck-hidden"></div>
+        <div class="ck ck-aria-live-announcer">
+            <div aria-live="polite" aria-relevant="additions">
+                <ul class="ck ck-aria-live-region-list"></ul>
+            </div>
+            <div aria-live="assertive" aria-relevant="additions">
+                <ul class="ck ck-aria-live-region-list"></ul>
+            </div>
+        </div>
+    </div>
+</div>
+<svg id="SvgjsSvg1001" width="2" height="0" xmlns="http://www.w3.org/2000/svg" version="1.1"
+     xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev"
+     style="overflow: hidden; top: -100%; left: -100%; position: absolute; opacity: 0;">
+    <defs id="SvgjsDefs1002"></defs>
+    <polyline id="SvgjsPolyline1003" points="0,0"></polyline>
+    <path id="SvgjsPath1004" d="M0 0 "></path>
+</svg>
+<chatgpt-sidebar data-gpts-theme="light"></chatgpt-sidebar>
+<chatgpt-sidebar-popups data-gpts-theme="light"></chatgpt-sidebar-popups>
+
+<svg id="SvgjsSvg1001" width="2" height="0" xmlns="http://www.w3.org/2000/svg" version="1.1"
+     xlink="http://www.w3.org/1999/xlink" svgjs="http://svgjs.dev"
+     style="overflow: hidden; top: -100%; left: -100%; position: absolute; opacity: 0;">
+    <defs id="SvgjsDefs1002"></defs>
+    <polyline id="SvgjsPolyline1003" points="0,0"></polyline>
+    <path id="SvgjsPath1004" d="M0 0 "></path>
+</svg>
+</body>
+</html>
