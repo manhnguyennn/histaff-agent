@@ -2662,8 +2662,8 @@
 
     <div class="body-wrapper bg-info-subtle vh-100" style="padding-top: 200px">
 
-        <div class="container h-100 pb-10">
-            <div class=" chat-popup h-100 ">
+        <div class="container h-100 pb-10 ">
+            <div class=" chat-popup h-100 position-relative">
                 <div class="p-9 border-bottom chat-meta-user d-flex align-items-center justify-content-between">
                     <div class="hstack gap-3 current-chat-user-name">
                         <div class="position-relative">
@@ -2681,28 +2681,72 @@
 
                 <!-- Giao diện chat -->
 
-                <div class="w-100 chat-container h-100 position-relative">
+                <div class="w-100 chat-container bg-light-subtle h-100 max-h-100 overflow-y-scroll pb-15">
 
 
-                        <div class="chat-box-inner bg-light-subtle p-4 h-100" id="chat-messages">
+                    <div class="chat-box-inner  p-4 " id="chat-messages">
 
-                            <div class="hstack gap-2 align-items-start mb-3 justify-content-start fade-in"
-                                 style="opacity: 1;">
-                                <div></div>
+                        <div class="hstack gap-2 align-items-start mb-3 justify-content-start fade-in"
+                             style="opacity: 1;">
+                            <div></div>
+                        </div>
+                        <div class="chat-message bot-message">
+                            <div class="chat-avatar-wrapper">
+                                <img src="/assets/images/svgs/icon-agents.svg" class="chat-avatar bot-avatar"
+                                     alt="Bot Avatar">
+                            </div>
+                            <div class="chat-content">
+                                <p class="chat-bubble">Tuyển dụng Chuyên viên Phân tích Nghiệp vụ (BA)<br></p>
+                                <h1>Tuyển dụng Chuyên viên Phân tích Nghiệp vụ (BA)</h1>
+                                <h2 id="summarize_title">Summarize</h2>
+                                <p>Histaff đang tìm kiếm một Chuyên viên Phân tích Nghiệp vụ (BA) năng động, sáng tạo để
+                                    tham gia vào đội ngũ của chúng tôi. Nếu bạn có đam mê với việc phân tích, thu thập
+                                    yêu cầu và giải quyết vấn đề, hãy ứng tuyển ngay!</p>
+                                <h2 id="requirements_header">Requirements</h2>
+                                <ul id="requirements_content_generate">
+                                    <li>Tối thiểu 2 năm kinh nghiệm làm BA</li>
+                                    <li>Kỹ năng phân tích và giải quyết vấn đề tốt</li>
+                                    <li>Khả năng giao tiếp và làm việc nhóm hiệu quả</li>
+                                    <li>Hiểu biết về quy trình phát triển phần mềm</li>
+                                </ul>
+                                <h2 id="responsibilities_header">Responsibilities</h2>
+                                <ul id="responsibilities_content_generate">
+                                    <li>Thu thập và phân tích yêu cầu của người dùng</li>
+                                    <li>Xây dựng tài liệu đặc tả yêu cầu (SRS)</li>
+                                    <li>Thiết kế use case và user story</li>
+                                    <li>Làm việc chặt chẽ với đội ngũ phát triển để đảm bảo yêu cầu được thực hiện
+                                        đúng
+                                    </li>
+                                    <li>Hỗ trợ kiểm thử và nghiệm thu sản phẩm</li>
+                                </ul>
+                                <h2 id="job_objectives_header">Job Objectives</h2>
+                                <ul id="job_objectives_content_generate">
+                                    <li>Đảm bảo yêu cầu nghiệp vụ được hiểu rõ và chính xác</li>
+                                    <li>Góp phần vào việc xây dựng các sản phẩm phần mềm chất lượng cao</li>
+                                    <li>Cải thiện quy trình phân tích nghiệp vụ</li>
+                                </ul>
+                                <div>
+                                    <button class="btn btn-outline-primary btn-sm" id="temp_code_50"
+                                            onclick="submitTempJob(50)">Apply
+                                    </button>
+                                </div>
+                                <p></p>
                             </div>
                         </div>
-
-
-
-
-                    <!-- Thanh nhập tin nhắn -->
-                    <div class="chat-input-container position-absolute bottom-0 left-0 w-100">
-                        <input type="text" id="chat-input" class="chat-input"
-                               placeholder="Type a Message">
                     </div>
+
+
+
+
                 </div>
                 <!-- Kết thúc giao diện chat -->
+                <!-- Thanh nhập tin nhắn -->
+                <div class="chat-input-container position-absolute bottom-0 left-0 w-100">
+                    <input type="text" id="chat-input" class="chat-input"
+                           placeholder="Type a Message">
+                </div>
             </div>
+
         </div>
     </div>
 
